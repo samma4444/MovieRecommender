@@ -36,7 +36,7 @@ recs = list({})
 for obj in imported_data:
     if obj["name"] in names:
         recs.append(obj)
-j = query + ".json"
+j = "RecommendedMoviesPairs/" + query + ".json"
 
 print(j)
 
