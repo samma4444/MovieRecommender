@@ -2,7 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-page = requests.get("https://www.finder.com/ca/netflix-movies")
+headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36',
+}
+
+service_url = "https://www.finder.com/ca/netflix-movies"
+
+page = requests.get(service_url, timeout=5, headers=headers)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -13,7 +19,11 @@ mov_list = list({})
 for mov in moviesList.contents:
     mov_traits = list(())
     traits = mov.children
-    name = mov.find('b').contents[0]
+    name = list(mov.find('b').contents[0])
+    for i in range(len(name)):
+        if (name[i] == '#') :
+            name[i] = ''
+    name = "".join(name).lower()
     for t in traits:
         mov_traits.append(t.contents[0])
     year_of_release = mov_traits[1]
