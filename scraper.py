@@ -21,7 +21,7 @@ for mov in moviesList.contents:
     traits = mov.children
     name = list(mov.find('b').contents[0])
     for i in range(len(name)):
-        if (name[i] == '#') :
+        if (name[i] == '#' or name[i] == ':' or name[i] == '?'):
             name[i] = ''
     name = "".join(name).lower()
     for t in traits:
